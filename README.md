@@ -14,6 +14,9 @@ This app also integerated otp sending to user on their email whether this email 
 ## Installing Django in Visual Studio
 - pip install django
 
+## Website Link
+[FoodStar](https://www.foodstar345.herokuapp.com)
+
 ## Features in this Web App
 
 ### Front Page
