@@ -1,0 +1,83 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load cart%}
+{% block content %}
+<div class="search-bar" style="position:relative;display:grid;grid-template-columns:40rem 100px;grid-template-rows: 50px;">
+    {% if message %}
+        <div class="alert alert-success alert-dismissible fade show mt-3 ml-2 mr-2" role="alert">
+            <strong>Hey User!</strong> {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <form action="{%url 'listing'%}">
+        <div class="search-1" style="position:absolute;left:30rem;margin-top:20px;grid-row: 1/2;grid-column:1/2;width:50rem;">
+            <div class="active-cyan-3 active-cyan-4 mb-4">
+                <input name="item" class="form-control" type="text" placeholder="Search Food" aria-label="Search">
+            </div>
+        </div>
+        <div class="search-2" style="grid-row:1/2;grid-column:2/3;position:absolute;left:42rem;margin-top:20px;">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </form>
+</div>
+<div class="container">
+    <div class="row mx-auto mr-3 ml-3 mb-0 p-5">
+    {% for product in products %}
+        <div class="card mx-auto m-3 shadow-sm bg-white rounded" style="width: 18rem;">
+            <img src="{{product.thumbnail.url}}" width=200px height=200px class="card-img-top" alt="...">
+            <div class="card-body">
+                <span><strong>{{product.name}}</strong></span>
+                <br>
+                <h5 class="card-title"><strong>Price <del>{{product.price|currency}}</del> <br>{{product|product_discount_price}}</strong></h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <span class="bg-success border text-left">{{product.discount_price}}% off</span>
+                    <hr>
+                
+                <a class="text-decoration-none m-0 p-0" href="/product_listing/{{product.cateogary.id}}"><p class="text-center">Show all</p></a>
+            </div>        
+        </div>
+    {% endfor %}
+    </div>
+    <div class="pagination ml-0 pl-0">
+        <div class="row">
+            <div class="col-md-12">
+                {% if products.has_other_pages%}
+                <ul class="pagination">
+                    {% if products.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{products.previous_page_number}}" class="page-link">&laquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">&laquo;</a>
+                    </li>
+                    {% endif %}
+                    {% for i in products.paginator.page_range %}
+                    {% if products.number == i %}
+                    <li class="page-item-active">
+                        <a class="page-link">{{i}}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a href="?page={{i}}" class="page-link">{{i}}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if products.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{products.next_page_number}}" class="page-link">&raquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link">&raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

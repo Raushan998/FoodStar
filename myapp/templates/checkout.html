@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block content %}
+<div class="container mt-5">
+    {% if message %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {% if user_name %}
+            <strong>Hey {{user_name}}!</strong> {{message}}
+        {% else %}
+            <strong>{{Hey User}}</strong> {{message}}
+        {% endif %}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Inc/dec</th>
+                <th>Total</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+              {% if product|is_in_cart:request.session.cart%}
+                <tr>
+                    <td><img style="height:80px;width:100px" src="{{product.thumbnail.url}}"  alt=""></td>
+                    <td>{{product.name}}</td>
+                    <td>{{product|product_discount_price}}</td> 
+                    <td>{{product|get_quantity:request.session.cart}}</td>
+                    
+                    <td>
+                        <div class="list">
+                            <form class="list-1" action="/checkitems/{{product.id}}" method="post">
+                                {% csrf_token %}
+                                <span>
+                                    <input hidden name='item' value='{{product.id}}' type="text">
+                                    <button type="submit" class="btn btn-secondary pt-1 pb-1 mt-2 ml-2" name="product">+</button>
+                                </span>
+                            </form>
+                            
+                            <form class="list-2" action="/checkitems/{{product.id}}" method="post">
+                                {% csrf_token %}
+                                <input hidden name='remove' value='{{product.id}}' type="text">
+                                <button type="submit" class="btn btn-secondary pt-1 pb-1 mt-2">-</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>{{product|price_total:request.session.cart}}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+        </tbody>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><h3>Total Price</h3></td>
+                <td></td>
+                <td></td>
+                <td><h4>{{products|get_cart_price:request.session.cart}}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+    {% if step_1 %}
+        <button type="button" class="btn btn-success btn-lg float-right" data-toggle="modal" data-target="#exampleModal">
+            Make Payment
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter Address</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/checkout" method=POST>
+                        {% csrf_token %}
+                        <div class="modal-body mr-3 ml-3">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Address</label>
+                                <input  name="address" type="text" class="form-control"  placeholder="32A NorthStreet California USA">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Phone Number</label>
+                                <input name="phone" type="text" class="form-control"  
+                                    placeholder="98XXXXXXXX">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+       <div class="box mt-5 ml-2 mr-2 border pt-3 pl-5 pr-5 pb-3">
+           {% if step_2%}
+                {% if message %}
+                <div class="alert alert-danger alert-dismissible fade show mt-3 ml-2 mr-2" role="alert">
+                    <strong>Hey user!</strong> {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+            {% else %}
+            {% if message %}
+                <div class="alert alert-success alert-dismissible fade show mt-3 ml-2 mr-2" role="alert">
+                    <strong>Hey user!</strong> {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+
+           {% endif %}
+            
+            <form action="/login" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="box-2 mt-2 ml-2">
+                    <a href="/forget-password">forget password</a>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+{% endblock %}

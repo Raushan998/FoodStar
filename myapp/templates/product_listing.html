@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load cart %}
+{% block content %}
+   <div class="container">
+       <div class="row">
+           <div class="col-md-10">
+            <table class="table table-hover  mt-5">
+            
+                <tbody>
+                    {% for product in products%}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>
+                            <p>{{product.name}}</p>
+                            <span class="bg-success">{{product.discount_price}}% off</span>
+                            <br>
+                            <span>per serve</span>
+                        </td>
+                        <td>{{product.price}}
+            
+                        </td>
+                        <td>
+                            <span class="mr-2">
+                                <img src="{{product.thumbnail.url}}" height=90 width=130 alt="">
+                            </span>
+            
+                            <br>
+                            {% if product|is_in_cart:request.session.cart %}
+                            <div class="list" style="display:grid;grid-template-rows: 1fr;grid-template-columns: 50px 50px 50px;align-items: baseline;">
+                                <form class="list-1" action="/additems/{{product.id}}" method="post">
+                                    {% csrf_token %}
+                                    <span>
+                                        <input hidden name='item' value='{{product.id}}' type="text">
+                                        <button type="submit" class="btn btn-secondary pt-1 pb-1 mt-2" name="product">+</button>
+                                    </span>
+                                </form>
+                                <div class="list-2" style="grid-row: 1/-1;grid-column:2/3;margin-top:0.3rem;padding-bottom:2rem;margin-right:1rem;padding-bottom:0;text-align: center;vertical-align: text-bottom;color:greenyellow;">{{product|get_cart:request.session.cart}}</div>
+                                <form class="list-3" style="grid-row: 1/-1;grid-column:3/4;" action="/additems/{{product.id}}" method="post">
+                                    {% csrf_token %}
+                                    <input hidden name='remove' value='{{product.id}}' type="text">
+                                    <button type="submit" class="btn btn-secondary pt-1 pb-1 mt-2">-</button>
+                                </form>
+                            </div>
+                            {% else %}
+                            <form action="/additems/{{product.id}}" method="POST">
+                                {% csrf_token %}
+                                <span>
+                                    <input hidden name='item' value='{{product.id}}' type="text">
+                                    <button type="submit" class="btn btn-secondary  ml-2 mt-2 p-1">Add Now</button>
+                                </span>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tbody>
+            
+                </tbody>
+            </table>
+           </div>
+           <div class="col-md-2 mt-5 ml-3 fixed">
+            <a href="/checkout"><button type="button" class="btn btn-primary">checkout</button></a>
+           </div>
+       </div>
+   </div>
+{% endblock %}

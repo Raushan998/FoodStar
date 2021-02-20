@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+   <div class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="position-absolute mt-5 pt-5 t-5">
+                {% if message %}
+                <div class="alert alert-warning alert-dismissible fade show mt-3 ml-2 mr-2" role="alert">
+                    <strong>Hey User!</strong> {{message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+                <h1 class="hungry"><strong>Hungry?</strong></h1>
+                <h1 class="order" style="opacity:0.5">Order from your nearest restaurant</h1>
+                <form action="/listing" method="post">
+                    {% csrf_token %}
+                    <div class="form-group mr-5 pr-5">
+                        <label for="exampleFormControlSelect1" disabled="disabled">Choose your nearest location</label>
+                        <select class="form-control" id="exampleFormControlSelect1" name="location">
+                            <option selected="true" disabled="disabled">choose your location</option>
+                            {% for key,value in location.items %}
+                            <option>{{value}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" style="background-color:orangered" class="btn btn-success">Search</button>
+                </form>
+            </div>:
+        </div>
+        <div class="col-md-6">
+            <img src="{% static 'images/restaurant.jpg'%}"  style="height:100vh; width:100vh;"alt="">
+        </div>
+    </div>
+   </div>
+{% endblock %}

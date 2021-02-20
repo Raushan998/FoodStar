@@ -1,0 +1,88 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container border mt-3">
+    {% if step_1 %}
+            {% if message %}
+            <div class="alert alert-danger alert-dismissible fade show mt-3 ml-2 mr-2" role="alert">
+                <strong>Hey User!</strong> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+            <div class="box mt-4 ml-3 mb-3 mr-5">
+                <form action="/signup" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName">First Name</label>
+                        {% if value.first_name %}
+                        <input name="first_name" type="text" class="form-control" value={{value.first_name}} placeholder="First Name">
+                        {% else %}
+                        <input name="first_name" type="text" class="form-control" placeholder="First Name">
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName">Last Name</label>
+                        {% if value.last_name %}
+                        <input name="last_name" type="text" class="form-control" value={{value.last_name}} placeholder="Last Name">
+                        {% else %}
+                        <input name="last_name" type="text" class="form-control"  placeholder="Last Name">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        
+                        <label for="exampleInputPhoneNumber">Phone Number</label>
+                        {% if value.phone_number %}
+                        <input name="phone" type="text" class="form-control" value={{value.phone_number}} placeholder="Phone Number">
+                        {% else %}
+                        <input name="phone" type="text" class="form-control"  placeholder="Phone Number">
+                        {% endif %}
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        {% if value.email %}
+                        <input type="email" name="email" class="form-control" value={{value.email}} id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter email">
+                        {% else %}
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter email">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password-1" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" name="password-2" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        {% endif %}
+        {% if step_2 %}
+            {% if message %}
+            <div class="alert alert-success alert-dismissible fade show mt-3 ml-2 mr-2" role="alert">
+                <strong>Hey User!</strong> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endif %}
+             <div class="box-1 mt-2">
+                <form action="/check_otp" method="post">
+                    {% csrf_token %}
+                    <div class="form-group ml-3 mr-3">
+                        <label for="exampleInputPassword1">OTP</label>
+                        <input type="text" name="otp" placeholder="Enter Otp">
+                    </div>
+                    <div class="box-3 ml-5 mt-2 mb-3">
+                        <button  type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+             </div>
+        {% endif %}
+    </div>
+{% endblock %}
