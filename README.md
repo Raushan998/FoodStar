@@ -36,7 +36,7 @@ This login Page has been also integrated if the user has forgotten password. If 
 option so that password can be recovered easily.
 
 ```
-![img_alt](https://github.com/Raushan998/FoodWebApp/blob/master/Screenshot%20from%202021-02-21%2000-21-37.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/master/Screenshot%20from%202021-02-21%2000-21-37.png)
 
 ### Add product Page
 ```
