@@ -22,13 +22,13 @@ In this page user can select location according to their choice where they want 
 If there any restaurant available it will be shown to user otherwise it doesn't matter.
 
 ```
-![img_alt](https://github.com/Raushan998/FoodWebApp/blob/master/Screenshot%20from%202021-02-21%2000-20-49.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/main/Screenshot%20from%202021-02-21%2000-20-49.png)
 
 ### Food Listing
 ```
   All the food Items inside the restaurant has been listed in the page. If the user wants to search according to his/her wish he can search using the search bar.
 ```
-![img_alt](https://github.com/Raushan998/FoodWebApp/blob/master/Screenshot%20from%202021-02-21%2000-21-22.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/main/Screenshot%20from%202021-02-21%2000-21-22.png)
 
 ### Login Page
 ```
@@ -36,18 +36,18 @@ This login Page has been also integrated if the user has forgotten password. If 
 option so that password can be recovered easily.
 
 ```
-![img_alt](https://github.com/Raushan998/FoodStar/blob/master/Screenshot%20from%202021-02-21%2000-21-37.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/main/Screenshot%20from%202021-02-21%2000-21-37.png)
 
 ### Add product Page
 ```
 Adding the product according to the need of user.In this user can add or remove the product the user want to remove the product.
 
 ```
-![img_alt](https://github.com/Raushan998/FoodWebApp/blob/master/Screenshot%20from%202021-02-21%2000-22-48.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/main/Screenshot%20from%202021-02-21%2000-23-12.png)
 
 ### Payment Page using Instamojo
 
-![img_alt](https://github.com/Raushan998/FoodWebApp/blob/master/Screenshot%20from%202021-02-21%2000-24-02.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/main/Screenshot%20from%202021-02-21%2000-24-16.png)
 
 ### All Orders Page
 ```
@@ -55,4 +55,4 @@ This page includes the total product user has purchased till date.
 
 ```
 
-![img_alt](https://github.com/Raushan998/FoodWebApp/blob/master/Screenshot%20from%202021-02-21%2000-24-45.png)
+![img_alt](https://github.com/Raushan998/FoodStar/blob/main/Screenshot%20from%202021-02-21%2000-24-45.png)
