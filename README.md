@@ -15,7 +15,7 @@ This app also integerated otp sending to user on their email whether this email 
 - pip install django
 
 ## Website Link
-[FoodStar](https://www.foodstar345.herokuapp.com)
+[FoodStar](https://foodstar345.herokuapp.com/)
 
 ## Features in this Web App
 
